@@ -12,6 +12,51 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-800: #3730a3;
   --color-brand-900: #312e81;
 
+/* Teal */
+--color-teal-50: #E6FFFA;
+--color-teal-100: #B2F5EA;
+--color-teal-200: #81E6D9;
+--color-teal-300: #4FD8C6; 
+--color-teal-400: #38C2B0; 
+--color-teal-500: #38B2AC;
+--color-teal-600: #319795;
+--color-teal-700: #2C7A7B;
+--color-teal-800: #285E61;
+--color-teal-900: #234E52;
+
+/* Coral */
+--color-coral-50: #FFF5F0;
+--color-coral-100: #FFE5D5;
+--color-coral-200: #FFD1B8;
+--color-coral-300: #FFA48C;
+--color-coral-500: #FFA17C;
+--color-coral-600: #FF8250;
+--color-coral-700: #F66A35;
+--color-coral-800: #DD4E1F;
+--color-coral-900: #C43D15;
+
+/* Beige */
+--color-beige-50: #FAF9F6;
+--color-beige-100: #F1EDE8;
+--color-beige-200: #E8E1D9;
+--color-beige-300: #D9D0C2;
+--color-beige-400: #D3CABE;
+--color-beige-500: #C1B7A7;
+--color-beige-600: #B8ADA5;
+--color-beige-700: #9E938A;
+--color-beige-800: #857A72;
+--color-beige-900: #716258;
+
+--color-slate-50: #F8FAFC;
+--color-slate-100: #E2E8F0;
+--color-slate-200: #CBD5E1;
+--color-slate-300: #A0AEC0;
+--color-slate-500: #718096;
+--color-slate-600: #4A5568;
+--color-slate-700: #2D3748;
+--color-slate-800: #1A202C;
+--color-slate-900: #171923;
+
   /* Grey */
   --color-grey-0: #fff;
   --color-grey-50: #f9fafb;
@@ -37,6 +82,9 @@ const GlobalStyles = createGlobalStyle`
   --color-indigo-700: #4338ca;
 
   --color-red-100: #fee2e2;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
   --color-red-700: #b91c1c;
   --color-red-800: #991b1b;
 
@@ -54,6 +102,60 @@ const GlobalStyles = createGlobalStyle`
   /* For dark mode */
   --image-grayscale: 0;
   --image-opacity: 100%;
+
+  --gradient-teal-slate-1: linear-gradient(to right, var(--color-teal-300), var(--color-slate-300));
+  --gradient-teal-slate-2: linear-gradient(to bottom, var(--color-teal-500), var(--color-slate-500));
+  --gradient-teal-slate-3: linear-gradient(to right, var(--color-teal-200), var(--color-slate-200));
+  --gradient-teal-slate-4: linear-gradient(to bottom, var(--color-teal-700), var(--color-slate-700));
+  --gradient-teal-slate-5: linear-gradient(to right, var(--color-teal-400), var(--color-slate-400));
+  --gradient-teal-slate-6: linear-gradient(to bottom, var(--color-teal-600), var(--color-slate-600));
+  --gradient-teal-slate-7: linear-gradient(to right, var(--color-teal-900), var(--color-slate-900));
+  --gradient-teal-slate-8: linear-gradient(to bottom, var(--color-teal-100), var(--color-slate-100));
+
+  --gradient-slate-teal-1: linear-gradient(to right, var(--color-slate-300), var(--color-teal-300));
+  --gradient-slate-teal-2: linear-gradient(to bottom, var(--color-slate-500), var(--color-teal-500));
+  --gradient-slate-teal-3: linear-gradient(to right, var(--color-slate-200), var(--color-teal-200));
+  --gradient-slate-teal-4: linear-gradient(to bottom, var(--color-slate-700), var(--color-teal-700));
+  --gradient-slate-teal-5: linear-gradient(to right, var(--color-slate-400), var(--color-teal-400));
+  --gradient-slate-teal-6: linear-gradient(to bottom, var(--color-slate-600), var(--color-teal-600));
+  --gradient-slate-teal-7: linear-gradient(to right, var(--color-slate-900), var(--color-teal-900));
+  --gradient-slate-teal-8: linear-gradient(to bottom, var(--color-slate-100), var(--color-teal-100));
+
+  --gradient-slate-beige-1: linear-gradient(to right, var(--color-slate-300), var(--color-beige-300));
+  --gradient-slate-beige-2: linear-gradient(to bottom, var(--color-slate-500), var(--color-beige-500));
+  --gradient-slate-beige-3: linear-gradient(to right, var(--color-slate-200), var(--color-beige-200));
+  --gradient-slate-beige-4: linear-gradient(to bottom, var(--color-slate-700), var(--color-beige-700));
+  --gradient-slate-beige-5: linear-gradient(to right, var(--color-slate-400), var(--color-beige-400));
+  --gradient-slate-beige-6: linear-gradient(to bottom, var(--color-slate-600), var(--color-beige-600));
+  --gradient-slate-beige-7: linear-gradient(to right, var(--color-slate-900), var(--color-beige-900));
+  --gradient-slate-beige-8: linear-gradient(to bottom, var(--color-slate-100), var(--color-beige-100));
+
+  --gradient-beige-slate-1: linear-gradient(to right, var(--color-beige-300), var(--color-slate-300));
+  --gradient-beige-slate-2: linear-gradient(to bottom, var(--color-beige-500), var(--color-slate-500));
+  --gradient-beige-slate-3: linear-gradient(to right, var(--color-beige-200), var(--color-slate-200));
+  --gradient-beige-slate-4: linear-gradient(to bottom, var(--color-beige-700), var(--color-slate-700));
+  --gradient-beige-slate-5: linear-gradient(to right, var(--color-beige-400), var(--color-slate-400));
+  --gradient-beige-slate-6: linear-gradient(to bottom, var(--color-beige-600), var(--color-slate-600));
+  --gradient-beige-slate-7: linear-gradient(to right, var(--color-beige-900), var(--color-slate-900));
+  --gradient-beige-slate-8: linear-gradient(to bottom, var(--color-beige-100), var(--color-slate-100));
+
+  --gradient-teal-beige-1: linear-gradient(to right, var(--color-teal-300), var(--color-beige-300));
+  --gradient-teal-beige-2: linear-gradient(to bottom, var(--color-teal-500), var(--color-beige-500));
+  --gradient-teal-beige-3: linear-gradient(to right, var(--color-teal-200), var(--color-beige-200));
+  --gradient-teal-beige-4: linear-gradient(to bottom, var(--color-teal-700), var(--color-beige-700));
+  --gradient-teal-beige-5: linear-gradient(to right, var(--color-teal-400), var(--color-beige-400));
+  --gradient-teal-beige-6: linear-gradient(to bottom, var(--color-teal-600), var(--color-beige-600));
+  --gradient-teal-beige-7: linear-gradient(to right, var(--color-teal-900), var(--color-beige-900));
+  --gradient-teal-beige-8: linear-gradient(to bottom, var(--color-teal-100), var(--color-beige-100));
+
+  --gradient-beige-teal-1: linear-gradient(to right, var(--color-beige-300), var(--color-teal-300));
+  --gradient-beige-teal-2: linear-gradient(to bottom, var(--color-beige-500), var(--color-teal-500));
+  --gradient-beige-teal-3: linear-gradient(to right, var(--color-beige-200), var(--color-teal-200));
+  --gradient-beige-teal-4: linear-gradient(to bottom, var(--color-beige-700), var(--color-teal-700));
+  --gradient-beige-teal-5: linear-gradient(to right, var(--color-beige-400), var(--color-teal-400));
+  --gradient-beige-teal-6: linear-gradient(to bottom, var(--color-beige-600), var(--color-teal-600));
+  --gradient-beige-teal-7: linear-gradient(to right, var(--color-beige-900), var(--color-teal-900));
+  --gradient-beige-teal-8: linear-gradient(to bottom, var(--color-beige-100), var(--color-teal-100));
 }
 
 *,
@@ -103,13 +205,13 @@ input:disabled {
   color: var(--color-grey-500);
 }
 
-input:focus,
+/* input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid var(--color-brand-600);
+  outline: 2px solid var(--color-teal-600);
   outline-offset: -1px;
-}
+} */
 
 /* Parent selector, finally 😃 */
 button:has(svg) {

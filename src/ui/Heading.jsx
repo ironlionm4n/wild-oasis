@@ -21,8 +21,13 @@ const Heading = styled.h1`
     `}
 
   line-height: 1.4;
-  background-color: var(--color-grey-50);
+  background-color: var(--color-slate-50);
+  color: var(--color-slate-700);
+  text-transform: capitalize;
+  border: 2px solid var(--color-teal-800);
+  box-shadow: 0.2rem 0.2rem 0.4rem var(--color-teal-800);
   padding: 1rem;
+  border-radius: 0.8rem;
 `;
 
 export default Heading;

@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const StyledLogo = styled.div`
   text-align: center;
-  border-bottom: 1px solid var(--color-grey-200);
+  border-bottom: 1px solid var(--color-coral-300);
+  padding: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 `;
 
 const Img = styled.img`

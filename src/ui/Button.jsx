@@ -22,11 +22,11 @@ const sizes = {
 
 const variations = {
   primary: css`
-    color: var(--color-brand-50);
-    background-color: var(--color-brand-600);
+    color: var(--color-slate-50);
+    background-color: var(--color-slate-600);
 
     &:hover {
-      background-color: var(--color-brand-700);
+      background-color: var(--color-slate-700);
     }
   `,
   secondary: css`
@@ -39,11 +39,16 @@ const variations = {
     }
   `,
   danger: css`
-    color: var(--color-red-100);
-    background-color: var(--color-red-700);
+    color: var(--color-slate-400);
+    background-color: var(--color-coral-300);
+    letter-spacing: 0.08rem;
 
     &:hover {
-      background-color: var(--color-red-800);
+      font-weight: 600;
+      color: var(--color-slate-800);
+      background-color: var(--color-coral-600);
+      transition: all 0.3s ease-out;
+      transform: scale(1.05);
     }
   `,
 };
