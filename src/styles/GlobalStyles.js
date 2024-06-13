@@ -135,7 +135,7 @@ const GlobalStyles = createGlobalStyle`
   --gradient-beige-slate-3: linear-gradient(to right, var(--color-beige-200), var(--color-slate-200));
   --gradient-beige-slate-4: linear-gradient(to bottom, var(--color-beige-700), var(--color-slate-700));
   --gradient-beige-slate-5: linear-gradient(to right, var(--color-beige-400), var(--color-slate-400));
-  --gradient-beige-slate-6: linear-gradient(to bottom, var(--color-beige-600), var(--color-slate-600));
+  --gradient-beige-slate-6: linear-gradient(to bottom, var(--color-beige-700), var(--color-slate-600));
   --gradient-beige-slate-7: linear-gradient(to right, var(--color-beige-900), var(--color-slate-900));
   --gradient-beige-slate-8: linear-gradient(to bottom, var(--color-beige-100), var(--color-slate-100));
 

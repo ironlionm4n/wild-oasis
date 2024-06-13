@@ -5,57 +5,49 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import { useForm } from "react-hook-form";
-import { createEditCabin } from "../../services/apiCabins";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import propTypes from "prop-types";
+import { useCreateCabin } from "../../hooks/query-hooks/useCreateCabin";
+import { useEditCabin } from "../../hooks/query-hooks/useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {} }) {
   const { id: editId, ...editValues } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
 
-  const queryClient = useQueryClient();
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
+
   const { errors } = formState;
 
-  const { mutate: createCabin, isLoading } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success("Cabin created");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => {
-      toast.error("Could not create cabin", err.message);
-    },
-  });
-
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success("Cabin edited");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => {
-      toast.error("Could not edit cabin", err.message);
-    },
-  });
+  const { createCabin, isLoading } = useCreateCabin();
+  const { editCabin, isEditing } = useEditCabin();
 
   const isWorking = isLoading || isEditing;
 
   const onSubmit = (data) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     if (isEditSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId });
-    else createCabin({ ...data, image: image });
+      editCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        {
+          onSuccess: (data) => {
+            console.log("Cabin edited", data);
+            reset(data);
+          },
+        }
+      );
+    else
+      createCabin(
+        { ...data, image: image },
+        {
+          onSuccess: (data) => {
+            console.log("Cabin created", data);
+            reset();
+          },
+        }
+      );
   };
 
   const onError = (errors) => {
@@ -128,7 +120,6 @@ function CreateCabinForm({ cabinToEdit = {} }) {
               message: "Description must be at most 200 characters",
             },
           })}
-          disabled={isWorking}
         />
       </FormRow>
 
@@ -144,9 +135,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
       </FormRow>
 
       <FormRow>
-        <Button variation="secondary" type="reset">
-          Clear Form
-        </Button>
+        <Button type="reset">Clear Form</Button>
         <Button disabled={isWorking}>
           {isEditSession ? "Edit Cabin" : "Create New Cabin"}
         </Button>

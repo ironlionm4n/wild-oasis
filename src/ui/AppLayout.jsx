@@ -17,7 +17,7 @@ const Main = styled.main`
     var(--color-beige-800)
   );
   padding: 2.4rem 2rem 2.8rem 2rem;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const Container = styled.div`

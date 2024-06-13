@@ -2,29 +2,27 @@ import styled from "styled-components";
 import React from "react";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../../utils/helpers";
-import { deleteCabin } from "../../services/apiCabins";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "../../hooks/query-hooks/useDeleteCabin";
+import { useCreateCabin } from "../../hooks/query-hooks/useCreateCabin";
+import { HiDuplicate, HiPencil, HiTrash } from "react-icons/hi";
 
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1.1fr 0.75fr 1fr 0.5fr;
-  column-gap: 2.4rem;
+  column-gap: 4rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
-  background: var(--gradient-beige-slate-7);
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-    margin-bottom: 0.8rem;
+    border-bottom: 3px solid var(--color-coral-300);
   }
 `;
 
 const Img = styled.img`
   display: block;
-  width: 6.4rem;
-  aspect-ratio: 3 / 2;
+  width: 8.4rem;
+  aspect-ratio: 3/2;
   object-fit: cover;
   object-position: center;
   transform: scale(1.5) translateX(-7px);
@@ -60,22 +58,19 @@ const Capacity = styled.div`
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = React.useState(false);
+  const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { createCabin, isLoading } = useCreateCabin();
 
-  const queryClient = useQueryClient();
-
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin deleted");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (error) => {
-      toast.error("Could not delete cabin " + error.message);
-      console.error("Could not delete cabin", error.message);
-    },
-  });
+  function handleDuplicate() {
+    createCabin({
+      name: `Copy of ${cabin.name}`,
+      maxCapacity: cabin.maxCapacity,
+      regularPrice: cabin.regularPrice,
+      discount: cabin.discount,
+      image: cabin.image,
+      description: cabin.description,
+    });
+  }
 
   return (
     <>
@@ -91,19 +86,21 @@ function CabinRow({ cabin }) {
         </Discount>
         <div style={{ display: "flex", gap: "12px" }}>
           <Button
-            variation="secondary"
             size="small"
-            onClick={() => setShowForm((prev) => !prev)}
+            onClick={() => handleDuplicate()}
+            disabled={isLoading}
           >
-            Edit
+            <HiDuplicate />
+          </Button>
+          <Button size="small" onClick={() => setShowForm((prev) => !prev)}>
+            <HiPencil />
           </Button>
           <Button
-            variation="danger"
             size="small"
-            onClick={() => mutate(cabin.id)}
+            onClick={() => deleteCabin(cabin.id)}
             disabled={isDeleting}
           >
-            Delete
+            <HiTrash />
           </Button>
         </div>
       </TableRow>
