@@ -10,7 +10,7 @@ import propTypes from "prop-types";
 import { useCreateCabin } from "../../hooks/query-hooks/useCreateCabin";
 import { useEditCabin } from "../../hooks/query-hooks/useEditCabin";
 
-function CreateCabinForm({ cabinToEdit = {} }) {
+function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
@@ -45,6 +45,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           onSuccess: (data) => {
             console.log("Cabin created", data);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -55,7 +56,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Cabin Name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -135,7 +139,9 @@ function CreateCabinForm({ cabinToEdit = {} }) {
       </FormRow>
 
       <FormRow>
-        <Button type="reset">Clear Form</Button>
+        <Button type="reset" onClick={() => onCloseModal?.()}>
+          Clear Form
+        </Button>
         <Button disabled={isWorking}>
           {isEditSession ? "Edit Cabin" : "Create New Cabin"}
         </Button>
@@ -148,4 +154,5 @@ export default CreateCabinForm;
 
 CreateCabinForm.propTypes = {
   cabinToEdit: propTypes.object,
+  onCloseModal: propTypes.func,
 };
