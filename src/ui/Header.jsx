@@ -15,7 +15,8 @@ const StyledHeader = styled.header`
   letter-spacing: 2px;
   word-spacing: 0.3rem;
   font-weight: 800;
-  padding: 1.2rem 4.8rem;
+  text-align: center;
+  padding: 1.2rem;
   border-bottom: 2px solid var(--color-slate-500);
 `;
 
