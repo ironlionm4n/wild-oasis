@@ -2,14 +2,14 @@ import styled, { css } from "styled-components";
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
   `,
   medium: css`
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     padding: 1.2rem 1.6rem;
     font-weight: 500;
   `,
@@ -23,30 +23,31 @@ const sizes = {
 const variations = {
   primary: css`
     color: var(--color-slate-50);
-    background-color: var(--color-slate-600);
+    background-color: var(--color-coral-300);
 
     &:hover {
-      background-color: var(--color-slate-700);
+      background-color: var(--color-coral-400);
     }
   `,
   secondary: css`
-    color: var(--color-grey-600);
-    background: var(--color-grey-0);
-    border: 1px solid var(--color-grey-200);
+    color: var(--color-slate-500);
+    background: var(--color-beige-50);
+    border: 1px solid var(--color-slate-200);
 
     &:hover {
-      background-color: var(--color-grey-50);
+      color: var(--color-slate-600);
+      background-color: var(--color-beige-100);
     }
   `,
   danger: css`
-    color: var(--color-slate-400);
-    background-color: var(--color-coral-300);
+    color: var(--color-slate-50);
+    background-color: var(--color-red-400);
     letter-spacing: 0.08rem;
 
     &:hover {
       font-weight: 600;
-      color: var(--color-slate-800);
-      background-color: var(--color-coral-600);
+      color: var(--color-slate-100);
+      background-color: var(--color-red-500);
       transition: all 0.3s ease-out;
       transform: scale(1.05);
     }

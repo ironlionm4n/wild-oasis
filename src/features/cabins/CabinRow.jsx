@@ -7,6 +7,8 @@ import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "../../hooks/query-hooks/useDeleteCabin";
 import { useCreateCabin } from "../../hooks/query-hooks/useCreateCabin";
 import { HiDuplicate, HiPencil, HiTrash } from "react-icons/hi";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -57,7 +59,6 @@ const Capacity = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const [showForm, setShowForm] = React.useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { createCabin, isLoading } = useCreateCabin();
 
@@ -73,39 +74,48 @@ function CabinRow({ cabin }) {
   }
 
   return (
-    <>
-      <TableRow role="row">
-        <Img src={cabin.image} alt={cabin.name} />
-        <Cabin>{cabin.name}</Cabin>
-        <Capacity>Fits up to {cabin.maxCapacity} guests</Capacity>
-        <Price>{formatCurrency(cabin.regularPrice)}</Price>
-        <Discount>
-          {formatCurrency(
-            cabin.regularPrice - cabin.regularPrice * (cabin.discount / 100)
-          )}
-        </Discount>
-        <div style={{ display: "flex", gap: "12px" }}>
-          <Button
-            size="small"
-            onClick={() => handleDuplicate()}
-            disabled={isLoading}
-          >
-            <HiDuplicate />
-          </Button>
-          <Button size="small" onClick={() => setShowForm((prev) => !prev)}>
-            <HiPencil />
-          </Button>
-          <Button
-            size="small"
-            onClick={() => deleteCabin(cabin.id)}
-            disabled={isDeleting}
-          >
-            <HiTrash />
-          </Button>
-        </div>
-      </TableRow>
-      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
-    </>
+    <TableRow role="row">
+      <Img src={cabin.image} alt={cabin.name} />
+      <Cabin>{cabin.name}</Cabin>
+      <Capacity>Fits up to {cabin.maxCapacity} guests</Capacity>
+      <Price>{formatCurrency(cabin.regularPrice)}</Price>
+      <Discount>
+        {formatCurrency(
+          cabin.regularPrice - cabin.regularPrice * (cabin.discount / 100)
+        )}
+      </Discount>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <Button
+          size="small"
+          onClick={() => handleDuplicate()}
+          disabled={isLoading}
+        >
+          <HiDuplicate />
+        </Button>
+        <Modal>
+          <Modal.Open opens="edit">
+            <Button size="small">
+              <HiPencil />
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="edit">
+            <CreateCabinForm cabinToEdit={cabin} />
+          </Modal.Window>
+          <Modal.Open opens="delete">
+            <Button size="small" variation="danger" disabled={isDeleting}>
+              <HiTrash />
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="cabins"
+              disabled={isDeleting}
+              onConfirm={() => deleteCabin(cabin.id)}
+            />
+          </Modal.Window>
+        </Modal>
+      </div>
+    </TableRow>
   );
 }
 

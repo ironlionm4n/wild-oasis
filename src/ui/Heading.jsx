@@ -24,8 +24,8 @@ const Heading = styled.h1`
   background-color: var(--color-slate-50);
   color: var(--color-slate-700);
   text-transform: capitalize;
-  border: 2px solid var(--color-teal-800);
-  box-shadow: 0.2rem 0.2rem 0.4rem var(--color-teal-800);
+  border: 2px solid var(--color-slate-500);
+  box-shadow: 0.2rem 0.2rem 0.4rem var(--color-beige-700);
   padding: 1rem;
   border-radius: 0.8rem;
 `;
