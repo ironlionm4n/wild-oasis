@@ -29,19 +29,17 @@ const Overlay = styled.div`
   transition: all 0.5s;
 `;
 
-const Button = styled.button`
-  background: none;
-  border: none;
-  padding: 0.4rem;
+const ModalCloseButton = styled.button`
+  background-color: var(--color-slate-50);
   border-radius: var(--border-radius-sm);
   transform: translateX(0.8rem);
   transition: all 0.2s;
   position: absolute;
-  top: 1.2rem;
-  right: 1.9rem;
+  top: 1rem;
+  right: 1.6rem;
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(--color-slate-100);
   }
 
   & svg {
@@ -50,7 +48,7 @@ const Button = styled.button`
     /* Sometimes we need both */
     /* fill: var(--color-grey-500);
     stroke: var(--color-grey-500); */
-    color: var(--color-grey-500);
+    color: var(--color-slate-700);
   }
 `;
 const ModalContext = createContext();
@@ -85,9 +83,9 @@ function Window({ children, name }) {
   return createPortal(
     <Overlay>
       <StyledModal ref={ref}>
-        <Button onClick={close}>
+        <ModalCloseButton onClick={close}>
           <HiXMark />
-        </Button>
+        </ModalCloseButton>
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,

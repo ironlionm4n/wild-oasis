@@ -24,6 +24,18 @@ const GlobalStyles = createGlobalStyle`
 --color-teal-800: #285E61;
 --color-teal-900: #234E52;
 
+/* Earth Green */
+--color-earth-green-50: #F0FFF4;
+--color-earth-green-100: #C6F6D5;
+--color-earth-green-200: #9AE6B4;
+--color-earth-green-300: #68D391;
+--color-earth-green-400: #48BB78;
+--color-earth-green-500: #38A169;
+--color-earth-green-600: #2F855A;
+--color-earth-green-700: #276749;
+--color-earth-green-800: #22543D;
+--color-earth-green-900: #1C4532;
+
 /* Coral */
 --color-coral-50: #FFF5F0;
 --color-coral-100: #FFE5D5;

@@ -1,10 +1,12 @@
+import { createContext, useContext } from "react";
 import styled from "styled-components";
+import propTypes from "prop-types";
 
 const StyledTable = styled.div`
-  border: 1px solid var(--color-grey-200);
+  border: 1px solid var(--color-slate-200);
 
   font-size: 1.4rem;
-  background-color: var(--color-grey-0);
+  background-color: var(--color-slate-50);
   border-radius: 7px;
   overflow: hidden;
 `;
@@ -20,19 +22,19 @@ const CommonRow = styled.div`
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
 
-  background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
+  background-color: var(--color-slate-100);
+  border-bottom: 1px solid var(--color-slate-100);
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
-  color: var(--color-grey-600);
+  color: var(--color-slate-600);
 `;
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
 
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
+    border-bottom: 1px solid var(--color-slate-100);
   }
 `;
 
@@ -41,7 +43,7 @@ const StyledBody = styled.section`
 `;
 
 const Footer = styled.footer`
-  background-color: var(--color-grey-50);
+  background-color: var(--color-slate-50);
   display: flex;
   justify-content: center;
   padding: 1.2rem;
@@ -58,3 +60,68 @@ const Empty = styled.p`
   text-align: center;
   margin: 2.4rem;
 `;
+
+const TableContext = createContext();
+
+function Table({ columns, children }) {
+  return (
+    <TableContext.Provider value={{ columns }}>
+      <StyledTable role="table">{children}</StyledTable>
+    </TableContext.Provider>
+  );
+}
+
+function Header({ children }) {
+  const { columns } = useContext(TableContext);
+
+  return (
+    <StyledHeader columns={columns} role="row" as="header">
+      {children}
+    </StyledHeader>
+  );
+}
+
+function Row({ children }) {
+  const { columns } = useContext(TableContext);
+
+  return (
+    <StyledRow columns={columns} role="row">
+      {children}
+    </StyledRow>
+  );
+}
+
+function Body({ data, render }) {
+  return (
+    <StyledBody>
+      {data.length > 0 ? data.map(render) : <Empty>No data available</Empty>}
+    </StyledBody>
+  );
+}
+
+function TableFooter({ children }) {}
+
+Table.Header = Header;
+Table.Row = Row;
+Table.Body = Body;
+Table.Footer = TableFooter;
+
+export default Table;
+
+Table.propTypes = {
+  columns: propTypes.string.isRequired,
+  children: propTypes.node,
+};
+Header.propTypes = {
+  children: propTypes.node.isRequired,
+};
+Row.propTypes = {
+  children: propTypes.node.isRequired,
+};
+Body.propTypes = {
+  data: propTypes.array,
+  render: propTypes.func,
+};
+Footer.propTypes = {
+  children: propTypes.node.isRequired,
+};

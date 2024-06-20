@@ -7,15 +7,14 @@ const Form = styled.form`
       padding: 2.4rem 4rem;
 
       /* Box */
-      background-color: var(--color-slate-50);
-      border: 2px solid var(--color-beige-700);
+      background-color: var(--color-beige-50);
       border-radius: var(--border-radius-md);
     `}
 
   ${(props) =>
     props.type === "modal" &&
     css`
-      width: 80rem;
+      width: 100%;
     `}
     
   overflow: hidden;

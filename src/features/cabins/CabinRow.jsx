@@ -9,17 +9,19 @@ import { useCreateCabin } from "../../hooks/query-hooks/useCreateCabin";
 import { HiDuplicate, HiPencil, HiTrash } from "react-icons/hi";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr 1.1fr 0.75fr 1fr 0.5fr;
-  column-gap: 4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
-  &:not(:last-child) {
-    border-bottom: 3px solid var(--color-coral-300);
-  }
-`;
+// const TableRow = styled.div`
+//   display: grid;
+//   grid-template-columns: 0.5fr 1fr 1.1fr 0.75fr 1fr 0.5fr;
+//   column-gap: 4rem;
+//   align-items: center;
+//   padding: 1.4rem 2.4rem;
+//   &:not(:last-child) {
+//     border-bottom: 3px solid var(--color-coral-300);
+//   }
+// `;
 
 const Img = styled.img`
   display: block;
@@ -33,7 +35,7 @@ const Img = styled.img`
 const Cabin = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--color-slate-50);
+  color: var(--color-slate-600);
   font-family: "Sono";
 `;
 
@@ -55,10 +57,11 @@ const Capacity = styled.div`
   font-family: "Sono";
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--color-slate-200);
+  color: var(--color-slate-500);
 `;
 
 function CabinRow({ cabin }) {
+  //console.log("cabin", cabin);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { createCabin, isLoading } = useCreateCabin();
 
@@ -74,7 +77,7 @@ function CabinRow({ cabin }) {
   }
 
   return (
-    <TableRow role="row">
+    <Table.Row>
       <Img src={cabin.image} alt={cabin.name} />
       <Cabin>{cabin.name}</Cabin>
       <Capacity>Fits up to {cabin.maxCapacity} guests</Capacity>
@@ -85,37 +88,34 @@ function CabinRow({ cabin }) {
         )}
       </Discount>
       <div style={{ display: "flex", gap: "12px" }}>
-        <Button
-          size="small"
-          onClick={() => handleDuplicate()}
-          disabled={isLoading}
-        >
-          <HiDuplicate />
-        </Button>
         <Modal>
-          <Modal.Open opens="edit">
-            <Button size="small">
-              <HiPencil />
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="edit">
-            <CreateCabinForm cabinToEdit={cabin} />
-          </Modal.Window>
-          <Modal.Open opens="delete">
-            <Button size="small" variation="danger" disabled={isDeleting}>
-              <HiTrash />
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="delete">
-            <ConfirmDelete
-              resourceName="cabins"
-              disabled={isDeleting}
-              onConfirm={() => deleteCabin(cabin.id)}
-            />
-          </Modal.Window>
+          <Menus.Menu>
+            <Menus.Toggle id={cabin.id} />
+            <Menus.List id={cabin.id}>
+              <Menus.Button icon={<HiDuplicate />} onClick={handleDuplicate}>
+                Duplicate
+              </Menus.Button>
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+            <Modal.Window name="edit">
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="cabins"
+                disabled={isDeleting}
+                onConfirm={() => deleteCabin(cabin.id)}
+              />
+            </Modal.Window>
+          </Menus.Menu>
         </Modal>
       </div>
-    </TableRow>
+    </Table.Row>
   );
 }
 
